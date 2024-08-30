@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projeto p5.js - Seguindo o Mouse</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.js"></script>
+
+</head>
+
+<body>
+
+  <script>
+
+    let numCircles = 10;
+
+    let circles = [];
+
+    function setup() {
+
+      createCanvas(600, 400);
+
+      noStroke();
+
+      for (let i = 0; i < numCircles; i++) {
+
+        circles.push(new Circle(random(width), random(height), random(20, 60), randomColor()));
+
+      }
+
+    }
+
+    function draw() {
+
+      background(0);
+
+      for (let i = 0; i < circles.length; i++) {
+
+        circles[i].update();
+
+        circles[i].show();
+
+      }
+
+    }
+
+    function randomColor() {
+
+      return color(random(255), random(255), random(255));
+
+    }
+
+    class Circle {
+
+      constructor(x, y, r, col) {
+
+        this.x = x;
+
+        this.y = y;
+
+        this.r = r;
+
+        this.col = col;
+
+      }
+
+      update() {
+
+        let targetX = mouseX;
+
+        let targetY = mouseY;
+
+        this.x += (targetX - this.x) * 0.05;
+
+        this.y += (targetY - this.y) * 0.05;
+
+      }
+
+      show() {
+
+        fill(this.col);
+
+        ellipse(this.x, this.y, this.r, this.r);
+
+      }
+
+    }
+
+  </script>
+
+</body>
+
+</html>
